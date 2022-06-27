@@ -1,0 +1,20 @@
+.view-table{
+   height: 300px;
+   position: relative;
+}
+
+.spinner-padding{
+   position: absolute;
+   top: 50%;
+   right: 50%;
+}
+
+.alert-warning{
+   position: absolute;
+   width: 100%;
+   top: 12%;
+}
+.button-information{
+   display: flex;
+   justify-content: flex-end;
+}

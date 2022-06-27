@@ -1,0 +1,76 @@
+<template>
+   <lightning-card variant="Narrow" title="Action List Opportunity" icon-name="standard:opportunity">
+      <div class="slds-p-horizontal_small">
+         <div class="slds-m-vertical_medium">
+            <lightning-layout multiple-rows>
+               <lightning-layout-item size="12" class="slds-p-vertical_small" medium-device-size="2">
+                  <div class="custom-box">
+                     <lightning-combobox
+                        data-filter="filter"
+                        name="filter"
+                        variant="label-hidden"
+                        value={valueFilter}
+                        placeholder="--Select the filter value--"
+                        options={options}
+                        onchange={handleChangeFilter}
+                     ></lightning-combobox>
+                  </div>
+               </lightning-layout-item>
+               <lightning-layout-item size="12" padding="around-small" medium-device-size="6">
+                  <div class="custom-box">
+                     <lightning-input 
+                        data-filter="search"
+                        disabled={selectedFilterValue}
+                        type="search" 
+                        variant="label-hidden" 
+                        name="search" 
+                        onchange={handleChangeFilter}
+                        placeholder="Search here..."
+                     ></lightning-input>
+                  </div>
+               </lightning-layout-item>
+               <lightning-layout-item size="12" class="slds-p-vertical_small" medium-device-size="4">
+                  <div class="button-information">
+                     <div class="custom-box">
+                        <lightning-button variant="brand" label={getAllRecord}  onclick={handleClickAllData} class="slds-m-right_medium"></lightning-button>
+                        <lightning-button variant="brand" label={getSelectedRecords} onclick={handleClickSelected}  class="slds-m-right_medium"></lightning-button>
+                     </div>
+                  </div>
+               </lightning-layout-item>
+            </lightning-layout>
+            
+            
+         </div>
+
+         <div class="view-table">
+            <lightning-datatable 
+               key-field="Id" 
+               render-mode="role-based"
+               render-config={renderConfig}
+               data={tableData} 
+               selected-rows={preSelectedRows}
+               show-row-number-column 
+               hide-checkbox-column={hiddenCheckBox}
+               columns={columns} 
+               onrowaction={handleRowAction}
+               onrowselection={handleRowSelectionTable}>
+            </lightning-datatable>
+
+            <div if:false={existingRecord} class="alert-warning">
+               <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
+                  <span class="slds-assistive-text">warning</span>
+                  <lightning-icon  icon-name="utility:warning" title="warning"></lightning-icon>
+                  <h2>No item selected</h2>
+               </div>
+            </div>
+
+            <div if:true={showSpinner} class="slds-spinner_inline spinner-padding">
+               <lightning-spinner variant="brand" 
+                                  alternative-text="Loading Cases"     
+                                  size="medium">
+               </lightning-spinner>
+           </div>
+         </div>
+      </div>
+   </lightning-card>
+</template>
